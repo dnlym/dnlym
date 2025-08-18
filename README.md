@@ -14,3 +14,10 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+## 🌤️ Today's Weather
+{{ template "hourly-table" $todayWeather.HourlyWeathers }}
+
+---
+
+## 📊 GitHub Stats
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=madanly&show_icons=true&theme=tokyonight)  
