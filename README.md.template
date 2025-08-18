@@ -1,0 +1,9 @@
+# 👋 Xin chào, mình là Mã Đan Ly
+
+## 🌤️ Today's Weather (auto-update)
+{{ template "hourly-table" $.TodayWeather.HourlyWeathers }}
+
+## 📅 3-Day Forecast
+{{ template "daily-table" .Weathers }}
+
+**Updated at:** {{ formatTime .UpdatedAt }}
