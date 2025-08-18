@@ -1,0 +1,35 @@
+name: Update Weather in README
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # chạy mỗi 6 giờ
+  workflow_dispatch:        # cho phép bấm chạy thủ công
+
+jobs:
+  update-weather:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Generate README
+        uses: huantt/weather-forecast@v1.0.6
+        with:
+          city: "Ho Chi Minh City"           # đổi thành thành phố bạn muốn
+          days: 3                             # số ngày dự báo
+          weather-api-key: ${{ secrets.WEATHER_API_KEY }}
+          template-file: "README.md.template" # file template bạn vừa tạo
+          out-file: "README.md"               # file sẽ được tạo/cập nhật
+
+      - name: Commit changes
+        run: |
+          if git diff --exit-code; then
+            echo "No changes to commit."
+            exit 0
+          else
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git add README.md
+            git commit -m "Update weather in README"
+            git push
+          fi
